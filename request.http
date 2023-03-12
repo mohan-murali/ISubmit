@@ -1,0 +1,11 @@
+POST http://localhost:3000/submit
+Content-Type: application/json
+
+{
+    "id": "1",
+    "feedback": {
+        "text": "this is sample assignment",
+        "mark": "1"
+    },
+    "url": "http://localhost/200s"
+}
