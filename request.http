@@ -3,9 +3,10 @@ Content-Type: application/json
 
 {
     "id": "1",
-    "feedback": {
+    "assignment": {
         "text": "this is sample assignment",
-        "mark": "1"
+        "moduleCode": "1",
+        "moduleTitle": "SOA"
     },
     "url": "http://localhost/200s"
 }

@@ -35,14 +35,14 @@ app.get("/", (req, res) => {
 
 app.post("/submit", async (req, res) => {
   try {
-    const { id, feedback, url } = req.body;
+    const { id, assignment, url } = req.body;
     // const url = await axios.post()
-    console.log(id, feedback);
-    if ((id, feedback, url)) {
+    console.log(id, assignment);
+    if ((id, assignment, url)) {
       let newSubmission = new SubmissionModel({
         id,
         url,
-        feedback,
+        assignment,
       });
 
       const result = await newSubmission.save();
@@ -50,18 +50,18 @@ app.post("/submit", async (req, res) => {
       res.status(200).json({
         subNr: result._id,
         success: true,
-        message: "Test saved successfully",
+        message: "Saved successfully",
       });
     } else {
       res.status(400).json({
         success: false,
-        message: "You need to send id, feedback and url",
+        message: "You need to send id, assignment and url",
       });
     }
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: `Failed to submit feedback, error -> ${err}`,
+      message: `Failed to submit assignment, error -> ${err}`,
     });
   }
 });

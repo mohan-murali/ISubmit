@@ -9,12 +9,16 @@ const submissionSchema = new Schema({
     type: String,
     required: true,
   },
-  feedback: {
+  assignment: {
     text: {
       type: String,
       required: true,
     },
-    mark: {
+    moduleCode: {
+      type: String,
+      required: true,
+    },
+    moduleTitle: {
       type: String,
       required: true,
     },
