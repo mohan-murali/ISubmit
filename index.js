@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const { SubmissionModel } = require("./models/submission");
+const Feedback = require("./models/feedback");
 
 const app = express();
 
@@ -63,6 +64,55 @@ app.post("/submit", async (req, res) => {
       success: false,
       message: `Failed to submit assignment, error -> ${err}`,
     });
+  }
+});
+
+app.get("/getFeedback", async (req, res) => {
+  try {
+    const { subNr } = req.body;
+    if (subNr) {
+      const feedback = await Feedback.findOne({ subNr });
+      if (feedback) {
+        res.status(200).json({
+          feedback: { subNr: feedback.subNr, text: feedback.text, mark: feedback.mark },
+          success: true
+        });
+      } else {
+        res.status(400).json({
+          success: false,
+          message: "The submission number does not exist. Please input a valid submission number",
+        });
+      }
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "Please input a valid submission number",
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: `Failed to fetch the feedback, error -> ${err}`,
+    });
+  }
+})
+
+app.post("/submitFeedback", async (req, res) => {
+  try {
+    const { subNr, text, mark } = req.body;
+    if (subNr && text && mark) {
+      const feedback = await Feedback.create({ subNr, text, mark });
+      if (feedback) {
+        res.status(200).json({
+          feedback,
+          success: true,
+          message: "Saved successfully",
+        });
+      }
+    }
+
+  } catch (err) {
+
   }
 });
 

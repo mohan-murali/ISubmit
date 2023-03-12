@@ -10,3 +10,21 @@ Content-Type: application/json
     },
     "url": "http://localhost/200s"
 }
+
+
+GET http://localhost:3000/getFeedback
+Content-Type: application/json
+
+{
+    "subNr": "640e0b4ef53b34f59454c412"
+}
+
+
+POST http://localhost:3000/submitFeedback
+Content-Type: application/json
+
+{
+    "subNr": "640e0b4ef53b34f59454c412",
+    "text": "Well done!",
+    "mark": 80
+}
